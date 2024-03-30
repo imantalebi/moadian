@@ -11,7 +11,7 @@ export class moadian {
     clientId
     privateKey
     certificate
-    apiBaseUrl = "https://sandboxrc.tax.gov.ir/requestsmanager/api/v2"
+    apiBaseUrl = "https://tp.tax.gov.ir/requestsmanager/api/v2"
     constructor(clientId, privateKey, certificate, sandbox = false) {
         this.clientId = clientId,
             this.privateKey = privateKey,
