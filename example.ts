@@ -1,12 +1,12 @@
 import { moadian } from './index';
-import * as moment from 'moment';
+import  moment from 'moment';
 import * as fs from 'fs';
 
 var clientId = "شناسه یکتا";
 
 var privateKey = fs.readFileSync('private.key', "utf-8").toString();
 var certificate = fs.readFileSync('certificate.txt', "utf-8");
-const send = new moadian(clientId, privateKey, certificate)
+const send = new moadian(clientId, privateKey, certificate,true)
 var invoiceId=100//شماره فاکتور
 var taxid = send.generateInvoiceId(moment().unix(), invoiceId)
 var inno = send.generateInno(invoiceId)

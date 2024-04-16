@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+
 import axios from 'axios';
 
 async function sendRequest(url, method = 'GET', token = '', body = []) {
@@ -13,12 +13,9 @@ async function sendRequest(url, method = 'GET', token = '', body = []) {
     } else {
         const postData = [body];
 
-        result =  axios.post(url, postData, { headers }).then(function(res){
-            console.log(res.data)
-        }) 
-     
+        result = await axios.post(url, postData, { headers }) 
     }
-    
+ 
     return result.data
 }
 

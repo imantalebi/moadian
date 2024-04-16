@@ -1,9 +1,9 @@
-import jwsService from "./services/jws.js"
+import jwsService from "./services/jws"
 import { v4 as uuidv4 } from 'uuid';
-import sendRequest from "./services/sendRequest.js"
-import * as moment from 'moment';
-import  verhoeff from "./services/verhoeff.js";
-import jweService from "./services/jwe.js";
+import sendRequest from "./services/sendRequest"
+import  moment from 'moment';
+import verhoeff from "./services/verhoeff";
+import jweService from "./services/jwe";
 
 
 
@@ -15,9 +15,11 @@ export class moadian {
     constructor(clientId, privateKey, certificate, sandbox = false) {
         this.clientId = clientId,
             this.privateKey = privateKey,
-            this.certificate = certificate
+            this.certificate = this.cerReplace(certificate)
+
+
         if (sandbox) {
-            this.apiBaseUrl == "https://sandboxrc.tax.gov.ir/requestsmanager/api/v2"
+            this.apiBaseUrl = "https://sandboxrc.tax.gov.ir/requestsmanager/api/v2"
         }
     }
 
@@ -60,7 +62,7 @@ export class moadian {
 
         var token = await this.requestToken();
 
-        const result = sendRequest(this.apiBaseUrl + '/invoice', 'POST', token, invoicesPackets);
+        const result = await sendRequest(this.apiBaseUrl + '/invoice', 'POST', token, invoicesPackets);
 
         return result;
     }
@@ -122,20 +124,20 @@ export class moadian {
         'X': 88,
         'Y': 89,
         'Z': 90,
-        '0':0,
-        '1':1,
-        '2':2,
-        '3':3,
-        '4':4,
-        '5':5,
-        '6':6,
-        '7':7,
-        '8':8,
-        '9':9,
+        '0': 0,
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7,
+        '8': 8,
+        '9': 9,
     };
     generateInvoiceId(date, internalInvoiceId) {
         var daysPastEpoch = this.getDaysPastEpoch(date);
-       
+
         var daysPastEpochPadded = daysPastEpoch.toString().padStart(6, '0');
         var hexDaysPastEpochPadded = this.dechex(daysPastEpoch).toString().padStart(5, '0');
         var numericClientId = this.clientIdToNumber();
@@ -153,19 +155,19 @@ export class moadian {
         return this.dechex(internalInvoiceId).toString().padStart(10, '0');
     }
     getDaysPastEpoch(date) {
-       
+
         return Math.round(date / (3600 * 24))
 
     }
 
-   
-     is_Numeric(s: number) {
+
+    is_Numeric(s: number) {
         if (typeof s != 'string') {
-          return false;
+            return false;
         }
-        
+
         return !isNaN(s) && !isNaN(parseFloat(s));
-      }
+    }
     clientIdToNumber() {
 
         var result = '';
@@ -204,7 +206,11 @@ export class moadian {
 
         return result;
     }
-
+    cerReplace(cer) {
+        let certificate = cer.replace("-----BEGIN CERTIFICATE-----", "")
+        certificate = certificate.replace("-----END CERTIFICATE-----", "")
+        return certificate.trim()
+    }
 }
 
 

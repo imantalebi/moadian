@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch example.ts"
   },
   "keywords": [
     "moadian",
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
+    "tsx": "^4.7.2",
     "typescript": "^5.4.3"
   },
   "bugs": {
