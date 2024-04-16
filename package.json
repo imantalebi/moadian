@@ -1,6 +1,6 @@
 {
   "name": "moadian",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "for sending to moadian api",
   "main": "index.js",
   "type": "commonjs",

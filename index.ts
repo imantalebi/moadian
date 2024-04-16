@@ -1,7 +1,7 @@
 import jwsService from "./services/jws"
 import { v4 as uuidv4 } from 'uuid';
 import sendRequest from "./services/sendRequest"
-import  moment from 'moment';
+import * as moment from 'moment';
 import verhoeff from "./services/verhoeff";
 import jweService from "./services/jwe";
 
