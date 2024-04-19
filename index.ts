@@ -2,9 +2,8 @@ import jwsService from "./services/jws"
 import { v4 as uuidv4 } from 'uuid';
 import sendRequest from "./services/sendRequest"
 import * as moment from 'moment';
-import verhoeff from "./services/verhoeff";
 import jweService from "./services/jwe";
-
+import * as cdigit from "cdigit"
 
 
 export class moadian {
@@ -147,8 +146,8 @@ export class moadian {
 
         var decimalInvoiceId = numericClientId + daysPastEpochPadded + internalInvoiceIdPadded;
 
-        var checksum = verhoeff(decimalInvoiceId)
-
+        var checksum =  cdigit.verhoeff.compute(decimalInvoiceId); 
+        
         return (this.clientId + hexDaysPastEpochPadded + hexInternalInvoiceIdPadded + checksum).toUpperCase();
     }
     generateInno(internalInvoiceId) {

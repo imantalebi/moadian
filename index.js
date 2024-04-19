@@ -41,8 +41,8 @@ var jws_1 = require("./services/jws");
 var uuid_1 = require("uuid");
 var sendRequest_1 = require("./services/sendRequest");
 var moment = require("moment");
-var verhoeff_1 = require("./services/verhoeff");
 var jwe_1 = require("./services/jwe");
+var cdigit = require("cdigit");
 var moadian = /** @class */ (function () {
     function moadian(clientId, privateKey, certificate, sandbox) {
         if (sandbox === void 0) { sandbox = false; }
@@ -208,7 +208,7 @@ var moadian = /** @class */ (function () {
         var internalInvoiceIdPadded = internalInvoiceId.toString().padStart(12, '0');
         var hexInternalInvoiceIdPadded = this.dechex(internalInvoiceId).toString().padStart(10, '0');
         var decimalInvoiceId = numericClientId + daysPastEpochPadded + internalInvoiceIdPadded;
-        var checksum = (0, verhoeff_1.default)(decimalInvoiceId);
+        var checksum = cdigit.verhoeff.compute(decimalInvoiceId);
         return (this.clientId + hexDaysPastEpochPadded + hexInternalInvoiceIdPadded + checksum).toUpperCase();
     };
     moadian.prototype.generateInno = function (internalInvoiceId) {

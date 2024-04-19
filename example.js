@@ -1,15 +1,15 @@
-import { moadian } from './index';
-import * as moment from 'moment';
-import * as fs from 'fs';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var index_1 = require("./index");
+var moment = require("moment");
+var fs = require("fs");
 var clientId = "شناسه یکتا";
-
 var privateKey = fs.readFileSync('private.key', "utf-8").toString();
 var certificate = fs.readFileSync('certificate.txt', "utf-8");
-const send = new moadian(clientId, privateKey, certificate,true)
-var invoiceId=100//شماره فاکتور
-var taxid = send.generateInvoiceId(moment().unix(), invoiceId)
-var inno = send.generateInno(invoiceId)
+var send = new index_1.moadian(clientId, privateKey, certificate, true);
+var invoiceId = 100; //شماره فاکتور
+var taxid = send.generateInvoiceId(moment().unix(), invoiceId);
+var inno = send.generateInno(invoiceId);
 var invoiceHeader = {
     'taxid': taxid,
     'inno': inno,
@@ -29,26 +29,23 @@ var invoiceHeader = {
     'setm': 1, // روش تسویه
 };
 var invoiceBody = [{
-
-    'sstid': '2720000114542',//شناسه کالا یا خدمات
-    'sstt': 'نام کالا یا خدمات',
-    'mu': 1627, //واحد اندازه گیری
-    'am': 1, //تعداد
-    'fee': 10000,
-    'prdis': 10000, //قبل از تخفیف
-    'dis': 0, //تخفیف
-    'adis': 0, //بعد از تخفیف
-    'vra': 9, //نرخ مالیات
-    'vam': 900, //مالیات
-    'tsstam': 10900, //مبلغ کل
-
-}];
-
+        'sstid': '2720000114542', //شناسه کالا یا خدمات
+        'sstt': 'نام کالا یا خدمات',
+        'mu': 1627, //واحد اندازه گیری
+        'am': 1, //تعداد
+        'fee': 10000,
+        'prdis': 10000, //قبل از تخفیف
+        'dis': 0, //تخفیف
+        'adis': 0, //بعد از تخفیف
+        'vra': 9, //نرخ مالیات
+        'vam': 900, //مالیات
+        'tsstam': 10900, //مبلغ کل
+    }];
 send.createInvoicePacket(invoiceHeader, invoiceBody).then(function (invoicePack) {
     send.sendInvoice(invoicePack).then(function (res) {
-        console.log(res)
-    })
-})
+        console.log(res);
+    });
+});
 // send.inquiryByUId("826c7008-12b2-4689-8ce1-0aec204e03b6").then(function(res){
 //     console.log(JSON.stringify(res))
 // })
