@@ -36,7 +36,7 @@ export class moadian {
             alg: 'RS256',
             typ: 'jose',
             x5c: [this.certificate.trim()],
-            sigT: moment().format('Y-m-d') + 'T' + moment().format('H:m:s') + 'Z',
+            sigT: moment().toISOString(),
             crit: ['sigT'],
             cty: 'text/plain',
         }
@@ -75,7 +75,7 @@ export class moadian {
             alg: 'RS256',
             typ: 'jose',
             x5c: [this.certificate.trim()],
-            sigT: moment().format('Y-m-d') + 'T' + moment().format('H:m:s') + 'Z',
+            sigT: moment().toISOString(),
             crit: ['sigT'],
             cty: 'text/plain',
         }

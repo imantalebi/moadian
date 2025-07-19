@@ -110,7 +110,7 @@ var moadian = /** @class */ (function () {
                             alg: 'RS256',
                             typ: 'jose',
                             x5c: [this.certificate.trim()],
-                            sigT: moment().format('Y-m-d') + 'T' + moment().format('H:m:s') + 'Z',
+                            sigT: moment().toISOString(),
                             crit: ['sigT'],
                             cty: 'text/plain',
                         };
@@ -173,7 +173,7 @@ var moadian = /** @class */ (function () {
                             alg: 'RS256',
                             typ: 'jose',
                             x5c: [this.certificate.trim()],
-                            sigT: moment().format('Y-m-d') + 'T' + moment().format('H:m:s') + 'Z',
+                            sigT: moment().toISOString(),
                             crit: ['sigT'],
                             cty: 'text/plain',
                         };
